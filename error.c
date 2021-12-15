@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:00:24 by user42            #+#    #+#             */
-/*   Updated: 2021/12/15 17:43:27 by user42           ###   ########.fr       */
+/*   Updated: 2021/12/15 19:22:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    usage(void)
     exit(EXIT_FAILURE);
 }
 
-void    terminate(char *error)
+void    stop(char *error)
 {
     if (errno == 0)
         write(2, "Error\n", 6);

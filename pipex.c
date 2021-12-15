@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:36:42 by dcyprien          #+#    #+#             */
-/*   Updated: 2021/12/15 19:10:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/12/15 19:21:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ pid_t	ft_first_command(char **av, int *pipefd, int *fd, char **envp)
 	path = get_path(cmd[0], envp);
 	pid = fork();
 	if (pid < 0)
-		terminate("fork");
+		stop("fork");
 	if (pid == 0)
 	{
 		if (fd[0] < 0)
-			terminate("Failed to open input file");
+			stop("Failed to open input file");
 		close(pipefd[0]);
 		dup2(fd[0], STDIN_FILENO);
 		dup2(pipefd[1], STDOUT_FILENO);
@@ -88,11 +88,11 @@ pid_t	ft_second_command(char **av, int *pipefd, int *fd, char **envp)
 	path = get_path(cmd[0], envp);
 	pid = fork();
 	if (pid < 0)
-		terminate("fork");
+		stop("fork");
 	if (pid == 0)
 	{
 		if (fd[1] < 0)
-			terminate("Failed to open output file");
+			stop("Failed to open output file");
 		close(pipefd[1]);
 		dup2(fd[1], STDOUT_FILENO);
 		dup2(pipefd[0], STDIN_FILENO);
@@ -122,7 +122,7 @@ int	main(int ac, char **av, char **envp)
 	else
 	{
 		if (pipe(pipefd) < 0)
-			terminate(NULL);
+			stop(NULL);
 		fds[0] = open(av[1], O_RDONLY | O_CREAT, 0644);
 		fds[1] = open(av[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		first_pid = ft_first_command(av, pipefd, fds, envp);
