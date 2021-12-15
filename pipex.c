@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:36:42 by dcyprien          #+#    #+#             */
-/*   Updated: 2021/12/15 17:49:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/12/15 17:52:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	main(int ac, char **av, char **envp)
 		cmd_two = get_path(av[3], envp);
 		ft_first_command(cmd_one, av, pipefd, fds, envp);
 		ft_second_command(cmd_two, av, pipefd, fds, envp);
+		free(cmd_one);
+		free(cmd_two);
 		close(fds[0]);
 		close(fds[1]);
 		waitpid(-1, &status, 0);
