@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcyprien <dcyprien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 16:35:26 by dcyprien          #+#    #+#             */
-/*   Updated: 2021/12/07 16:24:49 by dcyprien         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:35:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,11 @@ char	*ft_strcat(char *s1, char *s2)
 		str[i] = s1[i];
 		i++;
 	}
-	str[++i] = '/';
+	str[i++] = '/';
 	while (s2[j])
 	{
 		str[i] = s2[j++];
 		i++;
 	}
-	printf("cmd = %s\n", s2);
-	printf("str = %s\n", str);
 	return (str);
 }

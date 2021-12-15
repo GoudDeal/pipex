@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dcyprien <dcyprien@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 15:45:42 by dcyprien          #+#    #+#              #
-#    Updated: 2021/12/06 18:34:30 by dcyprien         ###   ########.fr        #
+#    Updated: 2021/12/15 17:34:24 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	pipex.c \
 			pipex_utils.c\
 			ft_split.c\
-			ft_strchr.c
+			ft_strchr.c\
+			error.c
 
 NAME	=	pipex
 
