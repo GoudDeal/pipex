@@ -104,5 +104,6 @@ char	*ft_strcat(char *s1, char *s2)
 		str[i] = s2[j++];
 		i++;
 	}
+	printf("s2 = %p str = %p\n", s2, str);
 	return (str);
 }

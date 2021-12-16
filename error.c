@@ -12,38 +12,51 @@
 
 #include "pipex.h"
 
-void    usage(void)
+void	usage(void)
 {
-    write(2, "Usage : ./pipex [file1] [command1] [command2] [file2]\n", 55);
-    exit(EXIT_FAILURE);
+	write(2, "Usage : ./pipex [file1] [command1] [command2] [file2]\n", 55);
+	exit(EXIT_FAILURE);
 }
 
-void    stop(char *error)
+void	stop(char *error)
 {
-    if (errno == 0)
-        write(2, "Error\n", 6);
-    else
-        perror(error);
-    exit(EXIT_FAILURE);
+	if (errno == 0)
+		write(2, "Error\n", 6);
+	else
+		perror(error);
+	exit(EXIT_FAILURE);
 }
 
-void    error_cmd(char **cmd, char *path)
+void	error_cmd(char **cmd, char *path)
 {
-    write(2, cmd[0], ft_strlen(cmd[0]));
-    write(2, " : command not found\n", 22);
-    free_malloc(cmd);
-    free(path);
-    exit(EXIT_FAILURE);
+	write(2, cmd[0], ft_strlen(cmd[0]));
+	write(2, " : command not found\n", 22);
+	free_malloc(cmd, path, 2);
+	exit(EXIT_FAILURE);
 }
 
-void    free_malloc(char **cmd)
+void	free_malloc(char **cmd, char *path, int mode)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (cmd[i])
-    {
-        free(cmd[i]);
-        i++;
-    }
+	i = 0;
+	if (mode == 2)
+	{
+		while (cmd[i])
+		{
+			free(cmd[i]);
+			i++;
+		}
+		free(path);
+	}
+	if (mode == 1)
+	{
+		while (cmd[i])
+		{
+			free(cmd[i]);
+			i++;
+		}
+	}
+	if (mode == 3)
+		free(path);
 }

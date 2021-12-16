@@ -26,9 +26,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(const char *s, char c);
 char	*ft_strcat(char *s1, char *s2);
-void    usage(void);
-void    stop(char *error);
-void    error_cmd(char **cmd, char *path);
-void    free_malloc(char **cmd);
+void	usage(void);
+void	stop(char *error);
+void	error_cmd(char **cmd, char *path);
+void	free_malloc(char **cmd, char *path, int mode);
 
 #endif

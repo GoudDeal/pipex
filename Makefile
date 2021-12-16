@@ -20,7 +20,7 @@ NAME	=	pipex
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 OBJS	=	${SRCS:.c=.o}
 
