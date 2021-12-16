@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 15:36:42 by dcyprien          #+#    #+#             */
-/*   Updated: 2021/12/15 19:21:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/12/16 13:22:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ char	*get_path(char *cmd, char **envp)
 		if (access(tmp, F_OK | X_OK) == 0)
 		{
 			i = 0;
-			while (path[i])
-				free(path[i++]);
+			free_malloc(path);
 			return (tmp);
 		}
 		free(tmp);
@@ -73,7 +72,7 @@ pid_t	ft_first_command(char **av, int *pipefd, int *fd, char **envp)
 			free(path);
 		}
 		else
-			error_cmd(cmd[0]);
+			error_cmd(cmd, path);
 	}
 	return (pid);
 }
@@ -103,9 +102,8 @@ pid_t	ft_second_command(char **av, int *pipefd, int *fd, char **envp)
 			free(path);
 		}
 		else
-			error_cmd(cmd[0]);
+			error_cmd(cmd, path);
 	}
-	write(2, "on arrive bien là ?\n", 22);
 	return(pid);
 }
 
@@ -129,12 +127,8 @@ int	main(int ac, char **av, char **envp)
 		second_pid = ft_second_command(av, pipefd, fds, envp);
 		close(fds[0]);
 		close(fds[1]);
-		waitpid(first_pid, &status, 0);
-		write(2, "on sort \n", 10);
-		status = 0;
-		printf("%d\n", (int)second_pid);
-		waitpid(second_pid, &status, 0);
-		write(2, "on sort pas\n", 13);
+		waitpid(first_pid, &status, WNOHANG);
+		waitpid(second_pid, &status, WNOHANG);
 	}
 	return (0);
 }

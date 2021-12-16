@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:00:24 by user42            #+#    #+#             */
-/*   Updated: 2021/12/15 19:22:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/12/16 13:20:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void    stop(char *error)
     exit(EXIT_FAILURE);
 }
 
-void    error_cmd(char *cmd)
+void    error_cmd(char **cmd, char *path)
 {
-    write(2, cmd, ft_strlen(cmd));
+    write(2, cmd[0], ft_strlen(cmd[0]));
     write(2, " : command not found\n", 22);
+    free_malloc(cmd);
+    free(path);
     exit(EXIT_FAILURE);
 }
 
