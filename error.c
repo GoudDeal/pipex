@@ -40,15 +40,6 @@ void	free_malloc(char **cmd, char *path, int mode)
 	int	i;
 
 	i = 0;
-	if (mode == 2)
-	{
-		while (cmd[i])
-		{
-			free(cmd[i]);
-			i++;
-		}
-		free(path);
-	}
 	if (mode == 1)
 	{
 		while (cmd[i])
@@ -56,6 +47,16 @@ void	free_malloc(char **cmd, char *path, int mode)
 			free(cmd[i]);
 			i++;
 		}
+	}
+	if (mode == 2)
+	{
+		while (cmd[i])
+		{
+			free(cmd[i]);
+			i++;
+		}
+		free(cmd);
+		free(path);
 	}
 	if (mode == 3)
 		free(path);

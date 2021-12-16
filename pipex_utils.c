@@ -90,7 +90,9 @@ char	*ft_strcat(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	str = malloc((ft_strlen(s1) +ft_strlen(s2)) * sizeof(char) + 1);
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) +ft_strlen(s2)) * sizeof(char) + 2);
 	if (!str)
 		return (NULL);
 	while (s1[i])
@@ -104,6 +106,6 @@ char	*ft_strcat(char *s1, char *s2)
 		str[i] = s2[j++];
 		i++;
 	}
-	printf("s2 = %p str = %p\n", s2, str);
+	str[i] = '\0';
 	return (str);
 }

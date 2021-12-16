@@ -108,5 +108,5 @@ char	**ft_split(const char *s, char c)
 		result[j] = NULL;
 		return (result);
 	}
-	return ((char **)ft_calloc(2, sizeof(char *)));
+	return (NULL);
 }

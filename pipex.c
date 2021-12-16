@@ -36,15 +36,11 @@ char	*get_path(char *cmd, char **envp)
 	while (path[++i])
 	{
 		tmp = ft_strcat(path[i], cmd);
-		printf("p = %p\n", path[i]);
-		if (tmp != NULL)
+		if (tmp && access(tmp, F_OK | X_OK) == 0)
 		{
-			if (access(tmp, F_OK | X_OK) == 0)
-			{
-				i = 0;
-				free_malloc(path, cmd, 1);
-				return (tmp);
-			}
+			i = 0;
+			free_malloc(path, cmd, 1);
+			return (tmp);
 		}
 		free(tmp);
 	}
@@ -56,18 +52,10 @@ pid_t	ft_first_command(char **av, int *pipefd, int *fd, char **envp)
 	pid_t	pid;
 	char	**cmd;
 	char	*path;
-	int		i;
 
-	i = 0;
 	cmd = ft_split(av[2], ' ');
 	path = get_path(cmd[0], envp);
 	pid = fork();
-	while (cmd[i])
-		{
-			printf("path = %p\n", &path);
-			printf("cmd = %p\n", cmd[i]);
-			i++;
-		}
 	if (pid < 0)
 		stop("fork");
 	if (pid == 0)
@@ -77,16 +65,14 @@ pid_t	ft_first_command(char **av, int *pipefd, int *fd, char **envp)
 		close(pipefd[0]);
 		dup2(fd[0], STDIN_FILENO);
 		dup2(pipefd[1], STDOUT_FILENO);
-		
 		if (path && cmd[0])
 		{
-			
 			execve(path, cmd, envp);
-			free_malloc(cmd, path, 2);
 		}
 		else
 			error_cmd(cmd, path);
 	}
+	free_malloc(cmd, path, 2);
 	return (pid);
 }
 
@@ -95,9 +81,7 @@ pid_t	ft_second_command(char **av, int *pipefd, int *fd, char **envp)
 	pid_t		pid;
 	char		**cmd;
 	char		*path;
-	int			i;
 
-	i = -1;
 	cmd = ft_split(av[3], ' ');
 	path = get_path(cmd[0], envp);
 	pid = fork();
@@ -113,13 +97,11 @@ pid_t	ft_second_command(char **av, int *pipefd, int *fd, char **envp)
 		if (path && cmd[0])
 		{
 			execve(path, cmd, envp);
-			while (cmd[i++])
-				free(cmd[i]);
-			free(path);
 		}
 		else
 			error_cmd(cmd, path);
 	}
+	free_malloc(cmd, path, 2);
 	return (pid);
 }
 
